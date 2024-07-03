@@ -47,7 +47,8 @@ Author: Prashanth Kondedath
     void Queue_##name##_destroy(Queue_##name* queue); \
     void Queue_##name##_enqueue(Queue_##name* queue, type value); \
     type Queue_##name##_dequeue(Queue_##name* queue); \
-    type Queue_##name##_peek(Queue_##name* queue);
+    type Queue_##name##_peek(Queue_##name* queue); \
+    int Queue_##name##_is_empty(Queue_##name* queue);
 
 // Macro to define functions for a queue type
 #define CTL_DEFINE_QUEUE_FUNCTIONS(type, name) \
@@ -101,6 +102,10 @@ Author: Prashanth Kondedath
             return queue->front->data; \
         } \
         return CTL_DEFAULT_RETURN(type); /* Add error handling as needed */ \
+    } \
+    \
+    int Queue_##name##_is_empty(Queue_##name* queue) { \
+        return queue->front == NULL; \
     }
 
 // Macro to define a new stack type and its functions
@@ -118,7 +123,8 @@ Author: Prashanth Kondedath
     void Stack_##name##_destroy(Stack_##name* stack); \
     void Stack_##name##_push(Stack_##name* stack, type value); \
     type Stack_##name##_pop(Stack_##name* stack); \
-    type Stack_##name##_peek(Stack_##name* stack);
+    type Stack_##name##_peek(Stack_##name* stack); \
+    int Stack_##name##_is_empty(Stack_##name* stack);
 
 // Macro to define functions for a stack type
 #define CTL_DEFINE_STACK_FUNCTIONS(type, name) \
@@ -162,6 +168,10 @@ Author: Prashanth Kondedath
             return stack->top->data; \
         } \
         return CTL_DEFAULT_RETURN(type); /* Add error handling as needed */ \
+    } \
+    \
+    int Stack_##name##_is_empty(Stack_##name* stack) { \
+        return stack->top == NULL; \
     }
 
 // Macro to define a new priority queue type and its functions
@@ -177,7 +187,8 @@ Author: Prashanth Kondedath
     void PriorityQueue_##name##_destroy(PriorityQueue_##name* pq); \
     void PriorityQueue_##name##_enqueue(PriorityQueue_##name* pq, type value); \
     type PriorityQueue_##name##_dequeue(PriorityQueue_##name* pq); \
-    type PriorityQueue_##name##_peek(PriorityQueue_##name* pq);
+    type PriorityQueue_##name##_peek(PriorityQueue_##name* pq); \
+    int PriorityQueue_##name##_is_empty(PriorityQueue_##name* pq);
 
 // Macro to define functions for a priority queue type
 #define CTL_DEFINE_PRIORITY_QUEUE_FUNCTIONS(type, name, compare) \
@@ -248,6 +259,10 @@ Author: Prashanth Kondedath
             return CTL_DEFAULT_RETURN(type); /* Add error handling as needed */ \
         } \
         return pq->data[0]; \
+    } \
+    \
+    int PriorityQueue_##name##_is_empty(PriorityQueue_##name* pq) { \
+        return pq->size == 0; \
     }
 
 #endif // CTL_H
